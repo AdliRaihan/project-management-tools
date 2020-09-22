@@ -1,0 +1,94 @@
+
+
+.leftNavigations {
+  width: 200px;
+  height: 100%;
+}
+
+
+.menuType {
+  list-style: none;
+  margin: 1rem;
+  background-color: rgba(236, 240, 241,.25);
+  border-radius: .25rem;
+}
+
+.menuType>li {
+  user-select: none;
+  cursor: pointer;
+  padding: .5rem;
+  transition: all .5s ease-in-out;
+}
+
+.menuType>li>* {
+  transition: all .5s ease-in-out;
+}
+
+.menuType>li:hover {
+  margin-left: 5px;
+}
+
+.menuType>li:hover>.menuName {
+  color: #00CDAC;
+}
+.menuType>li:hover>fa-icon {
+  color: #00CDAC;
+}
+
+.menuType>li:first-child {
+  margin-top: 1rem;
+}
+.menuType>li:last-child{
+  margin-bottom: 1rem;
+}
+
+.menuType>li>fa-icon {
+  font-size: 14px;
+  color: rgba(52, 73, 94,.5);
+  opacity: .75;
+  width: 20px;
+  margin-left: .75rem;
+}
+
+.menuType>li.active {
+  border-left: 3px solid  rgba(149, 165, 166,.5);
+}
+
+.menuType>li.active>.menuName {
+  color: rgba(52, 73, 94,1);
+}
+
+.menuType>li.active>fa-icon {
+  margin-left: .69rem !important;
+}
+
+.menuType>li.active>fa-icon {
+  font-size: 14px;
+  color: #00CDAC;
+  opacity: .75;
+}
+
+.menuType>li>.menuName {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(52, 73, 94,.5);
+}
+
+.dashboardHeaderContainer {
+  padding: 1rem;
+}
+
+.dashboardMenuLeft {
+  color: rgba(39, 174, 96,1.0);
+}
+
+.containerFavIcon {
+  height: 15px;
+  width: 15px;
+  border-radius: .2rem;
+  background-color: rgba(192, 57, 43,1.0);
+}
+
+.containerFavIcon>fa-icon {
+  color: white;
+}

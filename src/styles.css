@@ -1,0 +1,682 @@
+
+		@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@300;400;500;600&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+		html,body {
+      		height: 100%;
+			max-height: 100%;
+			min-width: 0px;
+			max-width: 100%;
+			margin: 0px;
+			padding: 0px;
+			font-family: 'Baloo 2', monospace;
+			background-color: rgba(236, 240, 241,1.0);
+			overflow-y: hidden;
+		}
+
+		img {
+			/* user-drag: none;  */
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-drag: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+
+		@media only screen and (max-width: 700px) {
+			#leftMenu {
+				display: none;
+			}
+
+			#formProjects{
+				display: flex !important;
+				flex-direction: column;
+			}
+			#formProjects>*:not(:last-child){
+				margin-bottom: 2rem;
+			}
+			.viewBuilderForm.row {
+				flex-direction: column !important;
+			}
+			.viewBuilderFormSided:not(:first-child){
+				margin-left: 0rem !important;
+			}
+			.floatRight {
+				float:left !important;
+			}
+		}
+
+		/*Display*/
+		.flexRow {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.flexCol {
+			display: flex;
+			flex-direction: column;
+		}
+
+		/*Layout*/
+		.widthMin {
+			min-width: 25px;
+			max-width: 100%;
+		}
+		.widthFull {
+			width: 100%;
+		}
+
+		.heightFull {
+			height: 100%;
+		}
+
+		.container {
+			height: 100%;
+			width: 100%;
+		}
+
+		.formContainer {
+			height: 100%;
+			width: 100%;
+		}
+
+		.formContainer:not(:last-child) {
+			margin-right: 3rem;
+		}
+
+		/*Margin Padding*/
+		.margin-5 {
+			margin: .5rem;
+		}
+
+		.marginX-5 {
+			margin-left: .5rem;
+			margin-right: .5rem;
+		}
+
+		.marginY-5 {
+			margin-top: .5rem;
+			margin-bottom: .5rem;
+		}
+
+		.marginY-10 {
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.padding-5 {
+			padding: .5rem;
+		}
+
+		.paddingX-5 {
+			padding-left: .5rem;
+			padding-right: .5rem;
+		}
+
+		.paddingY-5 {
+			padding-top: .5rem;
+			padding-bottom: .5rem;
+		}
+
+		/*Content Float*/
+		.floatLeft {
+			float: left;
+		}
+
+		.floatRight {
+			float: right;
+		}
+
+		/* Position */
+
+		.posAbs {
+			position: absolute;
+		}
+
+		.posRel {
+			position: relative;
+		}
+
+		.posFix {
+			position: fixed;
+		}
+
+		.centered {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,  -50%);
+		}
+
+		.centeredVertical {
+			top: 50%;
+			transform: translate(0%, -50%);
+		}
+
+		.centeredHorizontal {
+			left: 50%;
+			transform: translate(-50%, 0%);
+		}
+
+		/* groupContent */
+		.groupContent {
+			padding: 1.5rem;
+		}
+
+		.groupForm {
+			padding: .25rem;
+			width: 100%;
+		}
+
+		.debug {
+			background-color: black !important;
+			color: white !important;
+		}
+
+		/* Fonts */
+		.robotoMono {
+			font-family: 'Roboto Mono', sans-serif;
+		}
+
+		.baloo {
+			font-family: 'Baloo 2', sans-serif;
+		}
+
+		.openSans {
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		.small {
+			font-size: 12px;
+		}
+
+		.description {
+			font-size: 14px;
+		}
+
+		.header {
+			font-size: 18px;
+		}
+
+		.large {
+			font-size: 22px;
+		}
+
+		.bold {
+			font-weight: 600;
+		}
+
+		.light {
+			font-weight: 300;
+		}
+
+		/*Color*/
+		.primaryColor {
+			color: #2c3e50;
+		}
+
+		.primaryColorBackground {
+			background-color: #2c3e50;
+		}
+
+		.secondaryColor {
+			color: #2980b9;
+		}
+
+		.secondaryColorBackgound {
+			background-color: #2980b9;
+		}
+
+		.dimmedColor {
+			color: #2d3436;
+			
+		}
+		.dimmedColorBackground {
+			background-color:  #2d3436;
+		}
+
+		.lightWhiteColor {
+			color: #ecf0f1;
+		}
+
+		.lightWhiteColorBackground {
+			background-color: #ecf0f1;
+		}
+
+		.whiteBlueBackroundColor {
+			background-color: #f5f6fa;
+		}
+
+		.whiteColorBackground {
+			background-color: #f5f6fa;
+		}
+
+		.pureWhiteColorBackground {
+			background-color: white;
+		}
+
+		/* Border */
+		.borderLeft {
+			border-left: 2px solid #3498db;
+		}
+
+		.borderRight {
+			border-right: 2px solid #3498db;
+		}
+
+		.borderHalfOpacityBlack {
+			border-radius: .3rem;
+		}
+
+		.borderCard {
+			border: 1px solid rgba(189, 195, 199,1.0);
+		}
+
+		/* Opacity */
+		.opacityHalf {
+			opacity: 0.5;
+		}
+
+		.opacityFull {
+			opacity: 1;
+		}
+
+		/*Shadow*/
+		.shadow {
+			box-shadow: 0px 0px 15px rgba(0,0,0,0.001);
+		}
+
+		.shadowMedium {
+			box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
+		}
+
+		.shadowLarge {
+			box-shadow: 0px 0px 15px rgba(0,0,0,0.05);
+		}
+
+		/*Cursor*/
+		.cPointer {
+			cursor: pointer;
+		}
+
+		/*form*/
+		.headerMark {
+			margin-top: .5rem;
+			margin-bottom: .5rem;
+		}
+		.formMark:not(:last-child) {
+			margin-bottom: 1rem;
+		}
+		.floatLeftForm {
+			float:left;
+		}
+		.floatLeftForm:not(:last-child){
+			margin-right: .75rem;
+			margin-bottom: .75rem;
+		}
+
+		.checkBox {
+			margin-right: .5rem;
+		}
+
+		.dropDownInput:focus ~ .dropDown {
+			display: block !important;
+		}
+
+		.dropDown {
+			display: none;
+			left: 0px;
+			top: 100%;
+			background-color: white;
+			width: 99.7%;
+			border: 1px solid rgba(0,0,0,0.1);
+			box-shadow: 0px 0px 15px rgba(0,0,0,0.05);
+			max-height: 200px;
+			overflow: auto;
+			transform: translate(-0%, 0%);
+		}
+
+		.dropDown>.selection {
+			padding: .5rem;
+			font-size: 14px;
+			cursor: pointer;
+		}
+
+		.dropDown>.selection:hover {
+			background-color: rgba(223, 230, 233,.25);
+		}
+
+		.form {
+			margin-top: .15rem;
+			margin-bottom: .15rem;
+		}
+
+		.formgroup {
+			margin-top: .25rem;
+			margin-bottom: .25rem;
+		}
+
+		.viewBuilderForm {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.viewBuilderForm.row {
+			flex-direction: row;
+		}
+
+		.viewBuilderForm:not(:first-child) {
+			margin-top: .5rem;
+			margin-bottom: .5rem;
+		}
+
+		.viewBuilderFormSided:not(:first-child){
+			margin-left: .5rem;
+		}
+
+		.viewBuilderForm>.formDescriptive,.viewBuilderFormSided>.formDescriptive {
+			padding-top: .5rem;
+			padding-left: .25rem;
+			padding-right: .5rem;
+			margin-bottom: 5px;
+			font-size: 12px;
+			color: #849196;
+		}
+		.formDescriptiveHeader {
+			padding-bottom: 1.5rem !important;
+			border-bottom: 1px solid rgba(0,0,0,0.1);
+		}
+
+		.viewBuilderForm>input,.viewBuilderFormSided>input {
+			padding: .5rem 1rem;
+			outline: none;
+			font-size: 14px;
+			font-weight: bold;
+			font-family: 'Baloo 2', sans-serif;
+			border: 1px solid rgba(0,0,0,0.1);
+			box-shadow: 0px 0px 1px rgba(0,0,0,0.1);
+			border-radius: .25rem;
+			background: rgba(99, 110, 114,.025);
+		}
+
+		.viewBuilderForm>input::placeholder {
+			font-size: 12px;
+		}
+
+		.viewBuilderForm>input[type=date],.viewBuilderFormSided>input[type=date] {
+			padding: .6rem;
+		}
+
+		.viewBuilderForm>input:disabled {
+			background-color:rgba(223, 230, 233,.05);
+			color: rgba(99, 110, 114,.6) !important;
+		}
+
+		/*Custom*/
+		.subMenu>div {
+			user-select:  none;
+			padding: .25rem 1rem;
+		}
+
+		.subMenu>.menuSelection {
+			cursor: pointer;
+		}
+
+		.subMenu>.menuSelection>div:hover {
+			transition: opacity .1s ease-in-out;
+			opacity: 1 !important;
+		}
+
+		.boxOnline {
+			padding: .25rem;
+			border-radius: .15rem;
+		}
+
+		.profileSection {
+			width: 150px;
+		}
+
+		.imageHolder {
+			overflow: hidden;
+		}
+
+		.imageHolderCardTask {
+			overflow: hidden;
+			width: 100%;
+			height: 200px;
+			margin-bottom: 1.5rem;
+		}
+
+		.rounded {
+			border-radius: 50%;
+		}
+
+		.halfRounded {
+			border-radius: .5rem;
+		}
+
+		.cardTasks {
+			width: 225px;
+			min-height: 100px;
+			max-height: 250px;
+			border-radius: .5rem;
+			user-select: none;
+		}
+
+		.topProjectName {
+			height: 60px;
+			overflow: hidden;
+		}
+
+		.listTeam {
+			background-color: rgba(127, 143, 166,0.05);
+			border-radius: 1rem;
+		}
+
+		.teamsProfileImage {
+			min-width: 30px;
+			min-height: 30px;
+			position: relative;
+			overflow: hidden;
+			border-radius: 2rem;
+		}
+
+		.teamsProfileImage:not(:first-child) {
+			margin-left: -15px;
+		}
+
+		.inProgress{
+			background-color: rgba(68, 189, 50,.1);
+			color: rgba(68, 189, 50,1.0);
+			border-radius: 1rem;
+		}
+
+		.completed {
+			background-color: rgba(39, 60, 117,0.1);
+			color: rgba(39, 60, 117,1.0);
+			border-radius: 1rem;
+		}
+
+		.overdue {
+			background-color: rgba(230, 126, 34,0.1);
+			color: rgba(230, 126, 34,1.0);
+			border-radius: 1rem;
+		}
+
+		.boxMessage {
+			margin: 1rem;
+			width: 305px;
+			max-height: 5000px;
+			min-height: 0px;
+		}
+
+		.boxMessageImage {
+			overflow: hidden;
+			width: 100%;
+			height: 300px;
+			max-height: 800px;
+		}
+
+		/* width */
+		::-webkit-scrollbar {
+		  	width: 1px;
+		  	height: 10px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+		  background: rgba(0,0,0,0);
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+			border-radius: 5rem;
+		  background: rgba(34, 47, 62,0.5);
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		  background: #555;
+		}
+		.tag {
+			margin-bottom: .5rem;
+		}
+		.tag>div {
+			border-radius: 25rem;
+		}
+
+		.tag>div:not(:first-child) {
+			margin-left: .5rem;
+		}
+
+		.textCenter {
+			text-align: center;
+		}
+
+		.boxName {
+			width: 25px;
+			height: 25px;
+		}
+
+		.boxNameOrange {
+			background-color: rgba(230, 126, 34,.1);
+			color: rgba(230, 126, 34,1.0);
+			border: 1px solid rgba(230, 126, 34,.1);
+		}
+
+		.boxNameOrangeBorderLess {
+			background-color: rgba(230, 126, 34,0.5);
+		}
+
+		.boxNamePurple {
+			background-color: rgba(142, 68, 173,.1);
+			color: rgba(142, 68, 173,1.0);
+			border: 1px solid rgba(142, 68, 173,.1);
+		}
+
+		.boxNamePurpleBorderLess {
+			background-color: rgba(230, 126, 34,0.5);
+		}
+
+		.boxNameBlueBorderLess {
+			background-color: rgba(41, 128, 185,0.5);
+		}
+
+		.defaultButton {
+			padding: .5rem 1rem;
+			border: none;
+			color: white;
+			background-color: #0984e3;
+			font-family: 'Baloo 2', sans-serif;
+			transition: all 0.2s ease-in-out;
+			border-radius: 2px;
+		}
+
+		.defaultButton:focus {
+			outline: none;
+			box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+			background-color: #2980b9;
+		}
+
+		.defaultButtonTextOnly {
+			padding: .15rem 1rem;
+			border: none;
+			background: none;
+			color: rgba(68, 189, 50,1.0);
+		}
+
+		.costProduction>div {
+			margin-top: 1rem;
+			padding-bottom: 1rem;
+			border-bottom: 1px solid rgba(44, 62, 80,.1);
+		}
+
+		.costProduction>div:last-child {
+			border-bottom: none;
+		}
+
+		.projectDetail {
+			margin-bottom: 1rem;
+		}
+
+		.placeHolderHidden {
+			opacity: 0;
+		}
+
+		fa-icon {
+			margin-right: .5rem;
+		}
+
+		.extendsPadding>div {
+			padding: 1rem;
+		}
+
+		.gradientDefault {
+			background: #02AAB0;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to bottom, #00CDAC, #02AAB0);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to bottom, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		}
+
+		.gradientDark {
+			background-color: #000000;
+			background-image:  -webkit-linear-gradient(to bottom, #0000002c, #414141);
+			background-image: linear-gradient(to bottom, #0000003c, #414141);
+		}
+
+		.blackBgHalfOpacity {
+			background: rgba(0,0,0,0.1);
+		}
+
+		.bottom {
+			bottom: 0px;
+		}
+
+		a {
+			color: blue;
+			text-decoration: none;
+		}
+
+		input[type='checkbox'] {
+			appearance: none;
+			border: 1px solid #00b894;
+			width: 12.5px;
+			height: 11.5px;
+			margin-right: .5rem;
+			cursor: pointer;
+			border-radius: .1rem;
+		}
+
+		input[type='checkbox']:checked {
+			color: white;
+			background: black;
+			background: #02AAB0;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to bottom, #00CDAC, #02AAB0);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to bottom, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		}
+
+		input[type='checkbox']:focus {
+			outline: none;
+		}
+
+		

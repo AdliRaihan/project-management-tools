@@ -1,0 +1,130 @@
+@media only screen and (max-width: 800px) {
+}
+
+.imageProfileContainer {
+    margin-top: .5rem;
+    width: 200px;
+    min-height: 200px;
+    border-radius: .5rem;
+}
+
+.imageProfileHolder {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}
+
+.profileMenuSection {
+    height: 50px;
+    overflow: hidden;
+}
+
+.imageProfileBackground {
+    height: 100px;
+    overflow: hidden;
+}
+
+.editIcon {
+    color: gray;
+    opacity: .5;
+}
+
+.daysCalendar>div {
+    width: 25px;
+    padding: 1rem;
+    background-color: white;
+    margin-right: .5rem;
+    border-radius: 5px;
+    transform: scale(0.9);
+}
+
+.daysCalendar>div.currentDay {
+    transform: scale(1);
+    color: white !important;
+    background: #02AAB0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #00CDAC, #02AAB0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.rounded {
+    border-radius: 100% !important;
+}
+
+.imageRelativeHolder {
+    height: 160px;
+}
+
+.profileEditContainer>fa-icon {
+    color: gray;
+    font-size: 12px;
+    opacity: .5;
+    position: absolute;
+    left: 105%;
+    top: -2px;
+}
+
+.tagRole {
+    border-radius: .15rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: .25rem;
+}
+
+.tagRole.maintainer {
+    color: white;
+    background: #02AAB0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #00CDAC, #02AAB0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.tagJob {
+    top: .25rem;
+    left: 1rem;
+    font-size: 30px;
+}
+
+.tagJob.tagIos {
+    color: rgba(223, 230, 233,.5);
+}
+
+.boxCardMessage{
+    width: 100%;
+}
+
+.boxCardMessage>div:first-child {
+    margin-bottom: .25rem;
+}
+
+.message>.title {
+    color: rgba(45, 52, 54,1.0);
+    border-left: 3px solid rgba(214, 48, 49,1.0);
+    padding-left: .5rem;
+    margin-bottom: .25rem;
+}
+
+.btnCheckOut {
+    background: #D31027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EA384D, #D31027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EA384D, #D31027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    padding: .5rem;
+    color: white;
+    border-radius: 0rem 0rem 0.25rem .25rem;
+    border: none;
+    font-family: 'Open Sans', 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: not-allowed;
+    transition: all .1s ease-in-out;
+}
+
+
+.btnCheckOut:focus {
+    outline: none;
+}
+
+.timer {
+    margin-top: 1rem;
+    margin-bottom: .25rem;
+  }

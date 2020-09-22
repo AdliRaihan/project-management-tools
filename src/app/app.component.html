@@ -1,0 +1,66 @@
+
+<div *ngIf="authenticated; else login" class="container">
+  <div class="container flexRow">
+    <section id="Navigations">
+      <div class="leftNavigations shadowLarge pureWhiteColorBackground flexCol">
+        <div class="widthFull">
+          <div class="padding-5 flexRow textCenter dashboardHeaderContainer large">
+            <span class="bold primaryColor">
+              Apps
+            </span>
+            <span class="bold primaryColor dashboardMenuLeft">
+              chef
+            </span>
+          </div>
+        </div>
+        <div class="menuType margin-5">
+          <li class="flexRow active">
+            <fa-icon [icon]="faBriefcase"></fa-icon>
+            <span class="menuName">Projects</span>
+          </li>
+          <li class="flexRow">
+            <fa-icon [icon]="faEye"></fa-icon>
+            <span class="menuName">Overview</span>
+          </li>
+          <li class="flexRow">
+            <fa-icon [icon]="faUserPlus"></fa-icon>
+            <span class="menuName">Employee</span>
+          </li>
+          <li class="flexRow">
+            <fa-icon [icon]="faCogs"></fa-icon>
+            <span class="menuName">Manage</span>
+          </li>
+          <li class="flexRow" (click)="logout()">
+            <fa-icon [icon]="faSignOut"></fa-icon>
+            <span class="menuName">Logout</span>
+          </li>
+        </div>
+        <div class="menuType margin-5">
+          <div class="widthFull description dimmedColor flexRow">
+            <div class="padding-5 posRel" style="width: 30px;">
+              <div class="textCenter padding-5 posAbs centered containerFavIcon">
+                <fa-icon [icon]="faBell" class="posAbs centered"></fa-icon>
+              </div>
+            </div>
+            <div class="padding-5 flexCol">
+              <span class="description bold">Keep Updated !</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <div class="widthFull">
+      <app-dashboard-member></app-dashboard-member>
+    </div>
+  </div>
+</div>
+
+<ng-template #login>
+  <div *ngIf="authenticated === false" class="container">
+    <app-login (nameEvent)="doCheckSomething()"></app-login>
+  </div>
+</ng-template>
+
+
+

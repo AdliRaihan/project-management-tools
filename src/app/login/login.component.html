@@ -1,0 +1,62 @@
+
+<div class="container posRel">
+    <div class="posAbs centered containerLogin">
+        <div class="imageContainer posRel flexRow">
+            <div class="imageLogin container posRel">
+                <div class="posAbs centered">
+                    <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" height="100%">
+                </div>
+                <div class="container posAbs gradientDark opacityHalf">
+                </div>
+                <div class="posAbs bottom widthFull blackBgHalfOpacity lightWhiteColor">
+                    <div class="padding-5 flexCol marginY-5">
+                        <span class="header">Work Anywhere, Everywhere</span>
+                        <span class="small openSans">Introduce to remotely working in easiest way possible.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container posRel">
+                <div class="flexCol posAbs centered widthFull">
+                    <div class="widthFull">
+                        <div class="flexCol" style="padding-left: 2.5rem;padding-right: 2.5rem;">
+                            <span class="bold">Appschef Portal</span>
+                            <span class="small dimmedColor opacityHalf">Only registered user can login, if you had something on your mind please fill this form.</span>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <form [formGroup]="profileForm" (ngSubmit)="onFormSubmit()" class="form" style="padding-left: 2.5rem;padding-right: 2.5rem;">
+                            <div class="viewBuilderForm">
+                                <label class="formDescriptive bold">
+                                    Email Address
+                                </label>
+                                <input id="email" type="text" placeholder="Enter your e-mail address" formControlName ="email">
+                            </div>
+                            <div class="viewBuilderForm">
+                                <label class="formDescriptive bold">
+                                    Password
+                                </label>
+                                <input id="password" type="password" placeholder="Enter your password" formControlName ="password">
+                            </div>
+                            <div class="groupContentMinimal">
+                                <div class="floatLeft flexRow">
+                                    <input type="checkbox">
+                                    <span class="small bold primaryColor">
+                                        remember me?
+                                    </span>
+                                </div>
+                                <div class="floatRight flexRow">
+                                    <a href="https://www.google.com" class="small bold">Forgot Password ?</a>
+                                </div>
+                                    
+                                <div class="widthFull floatLeft paddingY-5">
+                                    <button type="submit" class="defaultButton small cPointer floatRight widthFull marginY-5">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

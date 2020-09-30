@@ -1,4 +1,5 @@
 import { IterableDiffers } from '@angular/core'
+import { initializeApp } from 'firebase'
 
 export class dashboardTicketModel {
     raw_ticket: string
@@ -88,5 +89,21 @@ class dashboardMemberTicket {
     constructor(private responseArr:any) {
         this.checked = responseArr["checked"]
         this.description = responseArr["ticket_description"]
+    }
+}
+
+// SubTicket
+export class subTicketModel {
+
+    subTickets: Array<string> = []
+
+    constructor(json: any) {
+        try {
+            json['values'].forEach(element => {
+                this.subTickets.push(element)
+            });
+        } catch (exception) {
+            
+        }
     }
 }

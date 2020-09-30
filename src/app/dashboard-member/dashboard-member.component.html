@@ -1,7 +1,94 @@
-<div class="container flexRow" >
-  <div class="flexCol heightFull shadowLarge whiteBlueBackroundColor extendsPadding" style="overflow-y: auto;width: 250px">
-    <div class="flexCol" style="align-items: center;">
+<div class="container flexRow">
+
+  <div id="ticketId" class="flexCol widthFull" style="overflow-y: auto;">
+
+    <!-- <div class="imageHolder posAbs widthFull" style="padding: 0px;height: 250px;overflow: hidden;">
+      <div class="container gradientWhiteLightClear posAbs opacityHalf"></div>
+      <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=755&q=80" width="100%">
       
+    </div> -->
+
+    <div class="posRel noticeHolder flexCol openSans">
+      <div class="groupContent">
+        <div class="flexRow">
+          <span class="whiteColor bold small dimmedColor  opacityHalf">
+            Current Project
+          </span>
+        </div>
+        <span class="whiteColor baloo bold large secondaryColor">
+          Project Management Tools
+        </span>
+
+      </div>
+
+      <div *ngIf="this.subTicketModel !== null; else noTicketAssigned" class="groupContent posRel" style="margin-bottom: 0.1rem;padding-bottom: .25rem;">
+
+        <div class="floatLeft flexRow marginX-5">
+          <span class="bold baloo primaryColor">{{selectedCard}} Card</span>
+          <div id="categories" class="posRel marginX-5" style="width: 15px;z-index: 9999;">
+            <fa-icon [icon]='this.faIcons["faArrowDown"]' class="posAbs centered"></fa-icon>
+            <div class="posAbs flexCol small bold baloo dataListLog" style="width: 150px;">
+              <div class="flexCol" *ngFor="let value of subTicketModel">
+                <span class="option padding-5 small bold baloo" (click)="changeCard(value)">{{value}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="floatRight">
+          <span class="bold baloo dimmedColor opacityHalf">View Detail</span>
+        </div>
+      </div>
+
+      <div class="groupContent noTopMargin posRel" *ngIf="this.detailTicketsModel.tasks !== undefined; else noTicketAssigned">
+        <div style="overflow: hidden; display: inline-block;">
+          
+          <div class="tdp_Cards baloo"  *ngFor="let values of this.detailTicketsModel.tasks.ticketProjectDetail; index as i">
+            <div class="tdp_Cards_inside posRel">
+              <!-- <div class="posAbs tdp_Cards_icon">
+                <fa-icon [icon]="this.faIcons['faApple']"></fa-icon>
+              </div> -->
+              <div class="flexCol pureWhiteColorBackground shadowLarge">
+                <span class="small bold dimmedColor opacityHalf">March 20 2020</span>
+                <span class="bold primaryColor header">{{values.tpdName}}</span>
+                <span class="small bold dimmedColor opacityHalf"  style="margin-top: 0.5rem">Description</span>
+                <span class="small openSans dimmedColor">{{values.tpdDescriptor}}</span>
+              </div>
+              <div class="container posRel ticketImageHolder">
+                <div class="posAbs center">
+                    <img src="https://images.unsplash.com/photo-1601451449588-bb2cfb26661c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=329&q=80" width="100%">
+                </div>
+              </div>
+              <div class="flexRow pureWhiteColorBackground posRel" style="height: 50px;">
+                <div class="flexRow posAbs centered heightFull" style="width: 80%;">
+                  <div class="widthFull">
+                    <div class="pgBar container">
+                      <i class="bgPg centered"></i>
+                      <i class="bgVal centeredVertical"></i>
+                    </div>
+                  </div>
+                  <div class="posRel heightFull" style="width: 25px; margin-left: 1rem;">
+                    <div class="posAbs centered">
+                      <span class="bold description baloo">100%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <ng-template #noTicketAssigned>
+        <span class="bold">No Tickets</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div id="profilesection" class="flexCol heightFull whiteBlueBackgroundColor extendsPadding">
+    <div class="flexCol" style="align-items: center;">
+
       <div class="imageProfileContainer shadowLarge pureWhiteColorBackground">
         <div class="flexCol" style="align-items: center;">
 
@@ -9,7 +96,8 @@
 
             <div class="imageProfileBackground posRel">
               <div class="posAbs">
-                <img src="https://images.unsplash.com/photo-1600415599565-2484ef4683f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" width="100%">
+                <img src="https://images.unsplash.com/photo-1600415599565-2484ef4683f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                  width="100%">
               </div>
             </div>
             <div class="profileMenuSection posRel flexRow" style="align-items: center;">
@@ -33,7 +121,7 @@
             <span class="small bold dimmedColor opacityHalf textCenter openSans textCenter">iOS Developer</span>
           </div>
 
-          <div class="widthFull"  style="margin-bottom: 1.5rem;">
+          <div class="widthFull" style="margin-bottom: 1.5rem;">
             <div class="tagRole maintainer flexRow marginX-5">
               <span class="small textCenter widthFull">maintainer</span>
             </div>
@@ -80,9 +168,5 @@
     </div>
   </div>
 
-  <div class="flexCol container shadowLarge whiteBlueBackroundColor extendsPadding" style="overflow-y: auto;">
-    WORK IN PROGRESS
-  </div>
-  
 
 </div>

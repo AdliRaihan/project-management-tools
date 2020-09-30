@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 
 import './dashboard-member.model';
 
-import { dashboardTicketModel } from './dashboard-member.model';
-import { HttpClient } from '@angular/common/http';
-import { faEdit, faPlus, faBuilding, faCertificate, faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { dashboardTicketModel, subTicketModel } from './dashboard-member.model';
+import { ticketModel } from '../model/ticket.model'
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { faEdit, faPlus, faBuilding, faCertificate, faDatabase, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faApple, faAndroid, faAngular } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
@@ -25,8 +26,11 @@ export class DashboardMemberComponent implements OnInit {
     "faAndroid": faAndroid,
     "faAngular": faAngular,
     "faDatabase": faDatabase,
-    "faEdit": faEdit
+    "faEdit": faEdit,
+    "faArrowDown": faAngleDown
   }
+
+  selectedCard:String = "Backlog";
 
   today = "03:00:00 AM"
   service: dashboardMemberService
@@ -36,13 +40,21 @@ export class DashboardMemberComponent implements OnInit {
 
   timerWork = 0
 
+  // Model
+  subTicketModel: Array<String>
+  conditionSubTicket: Boolean = false
+
+  detailTicketsModel: ticketModel = new ticketModel()
+
   constructor(private http: HttpClient) {
     this.service = new dashboardMemberService(this.http)
   }
 
   ngOnInit(): void {
-    this.getTicket()
     this.startTimer()
+    this.getSubTicketForm()
+    // this.service.sendExampleDetailTickets()
+    this.getDetailTasksForm()
   }
 
   // Service Get Ticket
@@ -115,6 +127,32 @@ export class DashboardMemberComponent implements OnInit {
     return (sumChecked.length / this.ticketModel[this.selectedTicket].ticket_lists.ticket_detail.length) * 100
   }
 
+  // Worker - [Get Sub Ticket Form]
+  changeCard(key:String) {
+    this.selectedCard = key
+  }
+
+  getSubTicketForm() {
+    var wSelf = this;
+    this.service.getSubTicketForm().subscribe({
+      next(value) {
+        wSelf.subTicketModel = new subTicketModel(value).subTickets
+        wSelf.conditionSubTicket = true
+        wSelf.subTicketModel.length
+      }
+    })
+  }
+
+  getDetailTasksForm() {
+    var wSelf = this;
+    this.service.getDetailTickets().subscribe( {
+      next(value) {
+        wSelf.detailTicketsModel.deserializer(value)
+        console.warn(wSelf.detailTicketsModel)
+        console.log(wSelf.detailTicketsModel.tasks.ticketProjectDetail)
+      }
+    })
+  }
 }
 
 @Injectable()
@@ -124,6 +162,83 @@ export class dashboardMemberService {
   allTicketURL = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/ticket_project.json"
   ticketObject(): Observable<firebase.firestore.DocumentData> {
     return this.http.get<firebase.firestore.DocumentData>(this.allTicketURL, { responseType: 'json' });
+  }
+
+
+  // Scripts
+  exampleSubTicketForm = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/sub_ticket_form.json"
+  sendExampleResponse() {
+    var jsonParam = [
+      "backlog",
+      "Need To Fix",
+      "On Hold Features",
+      "Deployment",
+      "Setup"
+    ]
+    var httpRequest = new HttpRequest("PATCH", this.exampleSubTicketForm, {
+      values: jsonParam
+    })
+    this.http.request(httpRequest).subscribe( {
+      complete() {
+        console.warn("sukses")
+      }
+    })
+  }
+
+  sendExampleTasks = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/detail_tickets.json"
+  sendExampleDetailTickets() {
+    var ticketSubTasks = [
+      {
+        sbTasksName: "benerin Bug!",
+        sbTasksDone: false,
+      }
+    ]
+    var ticketDetails = [
+      {
+        tpdName: "adli raihan testing",
+        tpdDescriptor: "descriptor",
+        tpdPlatform: "platformTest",
+        tpdSubTasks: ticketSubTasks 
+      },
+      {
+        tpdName: "adli raihan testing",
+        tpdDescriptor: "descriptor",
+        tpdPlatform: "platformTest",
+        tpdSubTasks: ticketSubTasks 
+      },
+      {
+        tpdName: "adli raihan testing",
+        tpdDescriptor: "descriptor",
+        tpdPlatform: "platformTest",
+        tpdSubTasks: ticketSubTasks 
+      },
+      {
+        tpdName: "adli raihan testing",
+        tpdDescriptor: "descriptor",
+        tpdPlatform: "platformTest",
+        tpdSubTasks: ticketSubTasks 
+      }
+  ]
+    var jsonParam = {
+      ticketProjectId: 0,
+      ticketProjectDetail: ticketDetails 
+    }
+    var httpRequest = new HttpRequest("PATCH", this.sendExampleTasks, {
+      tasks: jsonParam
+    })
+    this.http.request(httpRequest).subscribe( {
+      complete() {
+        console.warn("sukses")
+      }
+    })
+  }
+
+  getSubTicketForm(): Observable<Object> {
+    return this.http.get(this.exampleSubTicketForm)
+  }
+
+  getDetailTickets(): Observable<Object> {
+    return this.http.get(this.sendExampleTasks)
   }
 }
 

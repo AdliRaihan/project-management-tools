@@ -45,6 +45,29 @@
 			.floatRight {
 				float:left !important;
 			}
+
+			.leftNavigations {
+				display: none !important;
+			}
+
+			.tdp_Cards {
+				min-width: 100% !important;
+				max-width: 100% !important;
+			}
+
+		}
+
+		@media only screen and (max-width: 1200px) {
+
+			#profilesection {
+				display: none !important;
+			}
+
+			.tdp_Cards {
+				width: 50% !important;
+				max-width: 50% !important;
+			}
+
 		}
 
 		/*Display*/
@@ -227,6 +250,10 @@
 			background-color: #2980b9;
 		}
 
+		.whiteColorBackground {
+			background-color:  white;
+		}
+
 		.dimmedColor {
 			color: #2d3436;
 			
@@ -292,6 +319,11 @@
 
 		.shadowLarge {
 			box-shadow: 0px 0px 15px rgba(0,0,0,0.05);
+		}
+
+		
+		.shadowDLarge {
+			box-shadow: 0px 0px 15px rgba(0,0,0,1);
 		}
 
 		/*Cursor*/
@@ -520,18 +552,17 @@
 
 		/* width */
 		::-webkit-scrollbar {
-		  	width: 1px;
+		  	width: 5px;
 		  	height: 10px;
 		}
 
 		/* Track */
 		::-webkit-scrollbar-track {
-		  background: rgba(0,0,0,0);
+		  background: rgba(0, 0, 0, 0.222);
 		}
 
 		/* Handle */
 		::-webkit-scrollbar-thumb {
-			border-radius: 5rem;
 		  background: rgba(34, 47, 62,0.5);
 		}
 
@@ -642,6 +673,12 @@
 			background-color: #000000;
 			background-image:  -webkit-linear-gradient(to bottom, #0000002c, #414141);
 			background-image: linear-gradient(to bottom, #0000003c, #414141);
+		}
+		
+		.gradientWhiteLightClear {
+			background-color: #000000;
+			background-image:  -webkit-linear-gradient(to bottom, #ffffff00, #f5f6fa);
+			background-image: linear-gradient(to bottom, #ffffff00, #f5f6fa);
 		}
 
 		.blackBgHalfOpacity {

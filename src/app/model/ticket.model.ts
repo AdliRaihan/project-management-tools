@@ -1,5 +1,4 @@
 
-// import {Deserializable} from '@angular/'
 
 interface modelerObj {
     deserializer(input:any): this

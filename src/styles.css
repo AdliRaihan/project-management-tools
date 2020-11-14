@@ -5,14 +5,11 @@
 
 		html,body {
       		height: 100%;
-			max-height: 100%;
-			min-width: 0px;
-			max-width: 100%;
 			margin: 0px;
 			padding: 0px;
 			font-family: 'Baloo 2', monospace;
 			background-color: rgba(236, 240, 241,1.0);
-			overflow-y: hidden;
+			overflow-y: auto;
 		}
 
 		img {
@@ -74,6 +71,10 @@
 		.flexRow {
 			display: flex;
 			flex-direction: row;
+		}
+
+		.flexRow.reverse {
+			flex-direction: row-reverse !important;
 		}
 
 		.flexCol {
@@ -254,12 +255,20 @@
 			background-color:  white;
 		}
 
-		.dimmedColor {
-			color: #2d3436;
-			
+		.linkColor {
+			color: #0984e3;
 		}
+
+		.dimmedColor {
+			color: #9E9E9E;
+		}
+		
 		.dimmedColorBackground {
 			background-color:  #2d3436;
+		}
+
+		.greenColor {
+			color: #00b894;
 		}
 
 		.lightWhiteColor {
@@ -553,17 +562,19 @@
 		/* width */
 		::-webkit-scrollbar {
 		  	width: 5px;
-		  	height: 10px;
+			  height: 10px;
+			  border-radius: 5px;
 		}
 
 		/* Track */
 		::-webkit-scrollbar-track {
-		  background: rgba(0, 0, 0, 0.222);
+		  background: rgba(0, 0, 0, 0.1);
 		}
 
 		/* Handle */
 		::-webkit-scrollbar-thumb {
 		  background: rgba(34, 47, 62,0.5);
+		  border-radius: 2.5px;
 		}
 
 		/* Handle on hover */
@@ -662,6 +673,24 @@
 		.extendsPadding>div {
 			padding: 1rem;
 		}
+		
+		.extendsPaddingX>div {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+
+		.extendsPaddingX>div:first-child {
+			padding-top: 1rem;
+		}
+
+		.extendsPaddingX>div:last-child {
+			padding-bottom: 1rem;
+		}
+		
+		.extendsPaddingX>div {
+			margin-top: .25rem;
+			margin-bottom: .25rem;
+		}
 
 		.gradientDefault {
 			background: #02AAB0;  /* fallback for old browsers */
@@ -697,8 +726,10 @@
 		input[type='checkbox'] {
 			appearance: none;
 			border: 1px solid #00b894;
+			min-width: 12.5px;
 			width: 12.5px;
-			height: 11.5px;
+			height: 12.5px;
+			min-height: 12.5px;
 			margin-right: .5rem;
 			cursor: pointer;
 			border-radius: .1rem;
@@ -714,6 +745,25 @@
 
 		input[type='checkbox']:focus {
 			outline: none;
+		}
+
+		/* default input */
+		input[type='text'].leftRoundedText {
+			border: none;
+			border-radius: .25rem;
+			outline: none;
+			padding: 0 !important;
+			font-family: 'OpenSans', sans-serif;
+			background-color: rgba(0, 0, 0, 0);
+		}
+
+		.borderBottom {
+			border-bottom: 1px solid #02AAB0;
+		}
+
+		.borderDefault {
+			border: 1px solid #02aab017;
+			border-radius: .25rem;
 		}
 
 		

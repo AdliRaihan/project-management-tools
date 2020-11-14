@@ -1,22 +1,56 @@
-
 <div *ngIf="authenticated; else login" class="container">
-  <div class="container flexRow">
+  <div class="container flexRow overflowAuto">
     <div id="Navigations" style="z-index: 10;">
       <div class="leftNavigations pureWhiteColorBackground flexCol" style="z-index: 10;">
         <div class="widthFull">
-          <div class="padding-5 flexRow textCenter dashboardHeaderContainer large">
-            <span class="bold primaryColor">
-              Apps
-            </span>
-            <span class="bold primaryColor dashboardMenuLeft">
-              chef
-            </span>
+          <div class="paddingX-5 flexCol textCenter dashboardHeaderContainer">
+            <div class="flexRow textCenter" style="font-size: 28px;opacity:0.80;">
+              <span class="bold" style="color: #0984e3;">
+                G
+              </span>
+              <span class="bold" style="color: #d63031;">
+                o
+              </span>
+              <span class="bold" style="color: #fdcb6e;">
+                o
+              </span>
+              <span class="bold" style="color: #0984e3;">
+                g
+              </span>
+              <span class="bold" style="color: #00b894;">
+                l
+              </span>
+              <span class="bold" style="color: #d63031;">
+                e
+              </span>
+            </div>
           </div>
         </div>
-        <div class="menuType margin-5">
+
+        <div class="flexRow" style="padding: 0rem 1rem">
+          <div class="account-holder-001 padding-5 flexRow widthFull">
+            <!-- Top Notice -->
+            <div style="width:40px;margin-right: .5rem;">
+              <div class="d-image-holder">
+                <img src="../../assets/sample_profile_3.jpg" width="100%">
+              </div>
+            </div>
+            <div class="separated-5 posRel container paddingX-5">
+              <div class="flexCol posAbs centeredVertical">
+                <span class="bold primaryColor" style="overflow:hidden;">Kjelberg</span>
+                <span class="dimmedColor small openSans cPointer" style="overflow:hidden;">Quality Assurance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menuType">
+          <li class="flexRow large">
+            <span class="menuName ticketHeader">TOOLS</span>
+          </li>
           <li class="flexRow active">
             <fa-icon [icon]="faBriefcase"></fa-icon>
-            <span class="menuName">Projects</span>
+            <span class="menuName">Tickets</span>
           </li>
           <li class="flexRow">
             <fa-icon [icon]="faEye"></fa-icon>
@@ -49,7 +83,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="container" style="overflow: hidden; z-index: 0;">
       <app-dashboard-member></app-dashboard-member>
     </div>
@@ -61,6 +95,3 @@
     <app-login (nameEvent)="doCheckSomething()"></app-login>
   </div>
 </ng-template>
-
-
-

@@ -1,172 +1,131 @@
-<div class="container flexRow">
+<div class="flexCol container">
+  <!-- Div Header Content -->
+  <div class="notice-from-office">
+    <div class="notice-cards flexCenter" style="overflow: visible;">
+      <div class="flexRow padding-5">
+        <div class="searchBar flexRow">
+          <div class="posRel heightFull" style="padding-left: .5rem;">
+            <fa-icon [icon]="this.faIcons['faSearch']" class="small dimmedColor"></fa-icon>
+          </div>
+          <input type="text" autocomplete="off" class="container leftRoundedText">
+        </div>
+        <div class="searchBarTools flexRow">
 
-  <div id="ticketId" class="flexCol widthFull" style="overflow-y: auto;">
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- <div class="imageHolder posAbs widthFull" style="padding: 0px;height: 250px;overflow: hidden;">
-      <div class="container gradientWhiteLightClear posAbs opacityHalf"></div>
-      <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=755&q=80" width="100%">
-      
+  <!-- Add New Ticket Button + Form -->
+  <div class="posRel flexCol" *ngIf="true">
+    <div id="modalFormTicket" class="posAbs card-add-ticket extendsPadding">
+      <div id="kontrakBucat" class="flexCol" *ngIf="this.outLetTicketsModalForm.isModalOpen">
+        <div class="flexRow">
+          <span class="bold description greenColor">Maintainer Tools</span>
+        </div>
+        <form [formGroup]="subticketForm" class="form">
+          <div class="viewBuilderForm">
+            <label class="formDescriptive bold">
+              Ticket Name
+            </label>
+            <input id="ticketName" type="text" placeholder="Give ticket a name here" formControlName="ticketName"
+              autocomplete="off">
+          </div>
+          <div class="viewBuilderForm">
+            <label class="formDescriptive bold">
+              Description
+            </label>
+            <textarea id="ticketDescription" formControlName="ticketDescription" class="txarea-input" spellcheck="false"
+              placeholder="Give Ticket description here" (click)="this.setDefault('ticketDescription')"></textarea>
+          </div>
+          <div class="groupContentMinimal">
+            <div class="flexRow">
+              <span class="bold description dimmedColor marginX-5">251</span>
+              <span class="description dimmedColor">Characters left</span>
+            </div>
+            <button type="submit" class="defaultButton small cPointer floatRight widthFull marginY-5"
+              (click)="this.addNewTicket_Publish()">Add Ticket</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="flexRow container" style="overflow-x: auto;overflow-y: hidden;">
+    <!-- Ticket Lists -->
+    <div class="margin-5" *ngFor="let value of this.detailTicketsModel" >
+      <div class="header-tasks">
+        <div class="widthFull dimmedColor flexCol" style="margin-top: .5rem">
+          <div class="padding-5">
+            <span class="bold floatLeft">Backlog</span>
+            <div class="posRel heightFull floatRight cPointer" style="width: 15px;height: 25px;">
+              <fa-icon [icon]="this.faIcons['faArrowDown']" class="floatRight posAbs centered"></fa-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="scrolled-tasks-container" style="height: 90%;">
+          <div class="flexCol overflowAuto extendsPadding" *ngIf="this.detailTicketsModel != null">
+            <div class="ticket-detail borderDefault" *ngFor="let value of this.detailTicketsModel">
+              <div class="flexCol" style="width: 100%;">
+                <span class="bold description name-tasks">{{value.tasks.tpdName}}</span>
+                <span class="small dimmedColor description-tasks">{{value.tasks.tpdDescriptor}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Ticket Module Detail -->
+
+    <!-- <div class="container overflowAuto extendsPadding">
+      <div class="flexCol">
+        <span class="large bold primaryColor">
+          Backlog / Cust-Defect-Login-Problem
+        </span>
+        <div class="flexRow description openSans" style="text-align: justify;">
+          <div class="flexRow paddingX-5 widthFull">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="flexRow paddingX-5 widthFull">
+            <p></p>
+          </div>
+        </div>
+        <div class="flexRow">
+          <div class="flexRow tag-top-bar">
+            <span class="description bold active">Active</span>
+            <span class="description bold">Resolve</span>
+            <span class="description bold">Postponed</span>
+          </div>
+        </div>
+        <div class="flexCol openSans  box-tickets marginY-5">
+
+          <div class="flexRow">
+            <input type="checkbox" style="height: 13.5px;width: 10px;">
+            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
+          </div>
+          <div class="flexRow">
+            <input type="checkbox" style="height: 13.5px;width: 10px;">
+            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
+          </div>
+          <div class="flexRow">
+            <input type="checkbox" style="height: 13.5px;width: 10px;">
+            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
+          </div>
+          <div class="flexRow">
+            <input type="checkbox" style="height: 13.5px;width: 10px;">
+            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
+          </div>
+          <div class="flexRow">
+            <input type="checkbox" style="height: 13.5px;width: 10px;">
+            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
+          </div>
+
+
+        </div>
+      </div>
+
     </div> -->
 
-    <div class="posRel noticeHolder flexCol openSans">
-      <div class="groupContent">
-        <div class="flexRow">
-          <span class="whiteColor bold small dimmedColor  opacityHalf">
-            Current Project
-          </span>
-        </div>
-        <span class="whiteColor baloo bold large secondaryColor">
-          Project Management Tools
-        </span>
-
-      </div>
-
-      <div *ngIf="this.subTicketModel !== null; else noTicketAssigned" class="groupContent posRel" style="margin-bottom: 0.1rem;padding-bottom: .25rem;">
-
-        <div class="floatLeft flexRow marginX-5">
-          <span class="bold baloo primaryColor">{{selectedCard}} Card</span>
-          <div id="categories" class="posRel marginX-5" style="width: 15px;z-index: 9999;">
-            <fa-icon [icon]='this.faIcons["faArrowDown"]' class="posAbs centered"></fa-icon>
-            <div class="posAbs flexCol small bold baloo dataListLog" style="width: 150px;">
-              <div class="flexCol" *ngFor="let value of subTicketModel">
-                <span class="option padding-5 small bold baloo" (click)="changeCard(value)">{{value}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="floatRight">
-          <span class="bold baloo dimmedColor opacityHalf">View Detail</span>
-        </div>
-      </div>
-
-      <div class="groupContent noTopMargin posRel" *ngIf="this.detailTicketsModel.tasks !== undefined; else noTicketAssigned">
-        <div style="overflow: hidden; display: inline-block;">
-          
-          <div class="tdp_Cards baloo"  *ngFor="let values of this.detailTicketsModel.tasks.ticketProjectDetail; index as i">
-            <div class="tdp_Cards_inside posRel">
-              <!-- <div class="posAbs tdp_Cards_icon">
-                <fa-icon [icon]="this.faIcons['faApple']"></fa-icon>
-              </div> -->
-              <div class="flexCol pureWhiteColorBackground shadowLarge">
-                <span class="small bold dimmedColor opacityHalf">March 20 2020</span>
-                <span class="bold primaryColor header">{{values.tpdName}}</span>
-                <span class="small bold dimmedColor opacityHalf"  style="margin-top: 0.5rem">Description</span>
-                <span class="small openSans dimmedColor">{{values.tpdDescriptor}}</span>
-              </div>
-              <div class="container posRel ticketImageHolder">
-                <div class="posAbs center">
-                    <img src="https://images.unsplash.com/photo-1601451449588-bb2cfb26661c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=329&q=80" width="100%">
-                </div>
-              </div>
-              <div class="flexRow pureWhiteColorBackground posRel" style="height: 50px;">
-                <div class="flexRow posAbs centered heightFull" style="width: 80%;">
-                  <div class="widthFull">
-                    <div class="pgBar container">
-                      <i class="bgPg centered"></i>
-                      <i class="bgVal centeredVertical"></i>
-                    </div>
-                  </div>
-                  <div class="posRel heightFull" style="width: 25px; margin-left: 1rem;">
-                    <div class="posAbs centered">
-                      <span class="bold description baloo">100%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <ng-template #noTicketAssigned>
-        <span class="bold">No Tickets</span>
-      </ng-template>
-    </div>
   </div>
-
-  <div id="profilesection" class="flexCol heightFull whiteBlueBackgroundColor extendsPadding">
-    <div class="flexCol" style="align-items: center;">
-
-      <div class="imageProfileContainer shadowLarge pureWhiteColorBackground">
-        <div class="flexCol" style="align-items: center;">
-
-          <div class="posRel widthFull imageRelativeHolder ">
-
-            <div class="imageProfileBackground posRel">
-              <div class="posAbs">
-                <img src="https://images.unsplash.com/photo-1600415599565-2484ef4683f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                  width="100%">
-              </div>
-            </div>
-            <div class="profileMenuSection posRel flexRow" style="align-items: center;">
-              <div class="widthFull floatRight paddingX-5" style="text-align: right;">
-                <fa-icon [icon]="this.faIcons['faEdit']" class="editIcon"></fa-icon>
-              </div>
-            </div>
-
-            <div class="imageProfileHolder posAbs centered rounded">
-              <img src="../../assets/sampe_profile_2.jpg" width="100%">
-            </div>
-
-            <div class="posAbs tagJob tagIos">
-              <fa-icon [icon]="this.faIcons['faApple']"></fa-icon>
-            </div>
-
-          </div>
-
-          <div class="flexCol primaryColor padding-5">
-            <span class="bold textCenter">Bill Gates</span>
-            <span class="small bold dimmedColor opacityHalf textCenter openSans textCenter">iOS Developer</span>
-          </div>
-
-          <div class="widthFull" style="margin-bottom: 1.5rem;">
-            <div class="tagRole maintainer flexRow marginX-5">
-              <span class="small textCenter widthFull">maintainer</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="flexRow marginY-10">
-        <div class="daysCalendar flexRow widthFull" style="align-items: center;">
-
-          <div class="flexCol opacityHalf">
-            <span class="large primaryColor textCenter">29</span>
-            <span class="description bold dimmedColor textCenter">Sept</span>
-          </div>
-          <div class="flexCol currentDay">
-            <span class="large textCenter">30</span>
-            <span class="description textCenter">Sept</span>
-          </div>
-          <div class="flexCol opacityHalf">
-            <span class="large primaryColor textCenter">31</span>
-            <span class="description bold dimmedColor textCenter">Sept</span>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="flexCol widthFull">
-        <div class="boxCardMessage pureWhiteColorBackground">
-          <div class="message padding-5 flexCol">
-            <span class="title description bold">Working Remotely</span>
-            <span class="description bold robotoMono textCenter timer large">{{timerWork}}</span>
-            <span class="textCenter openSans small dimmedColor bold opacityHalf">On Break</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flexRow widthFull">
-        <div class="message flexCol posRel widthFull ">
-          <button class="bold btnCheckOut">Check Out</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
 </div>

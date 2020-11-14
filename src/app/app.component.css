@@ -10,7 +10,7 @@
 
 .menuType {
   list-style: none;
-  margin: 1rem;
+  margin: 0rem 1rem;
   background-color: rgba(236, 240, 241,.25);
   border-radius: .25rem;
 }
@@ -19,21 +19,17 @@
   user-select: none;
   cursor: pointer;
   padding: .5rem;
-  transition: all .5s ease-in-out;
+  transition: all .15s ease-in-out;
 }
 
 .menuType>li>* {
-  transition: all .5s ease-in-out;
+  transition: all .15s ease-in-out;
 }
 
-.menuType>li:hover {
-  margin-left: 5px;
-}
-
-.menuType>li:hover>.menuName {
+.menuType>li:hover>.menuName:not(.ticketHeader) {
   color: #00CDAC;
 }
-.menuType>li:hover>fa-icon {
+.menuType>li:hover>fa-icon:not(.ticketHeader) {
   color: #00CDAC;
 }
 
@@ -53,7 +49,7 @@
 }
 
 .menuType>li.active {
-  border-left: 3px solid  rgba(149, 165, 166,.5);
+
 }
 
 .menuType>li.active>.menuName {
@@ -93,4 +89,19 @@
 
 .containerFavIcon>fa-icon {
   color: white;
+}
+
+/* Image */
+.d-image-holder {
+  position: relative;
+  height: 40px !important;
+  border-radius: 100%;
+  width: 40px !important;
+  overflow: hidden;
+}
+
+.account-holder-001 {
+  border: 1px solid rgba(0, 0, 0,.01);
+  border-radius: .15rem;
+  background-color: rgba(0, 0, 0,.065);
 }

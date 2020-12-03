@@ -1,4 +1,4 @@
-<div class="flexCol container">
+<div class="flexCol container posRel">
   <!-- Div Header Content -->
   <div class="notice-from-office">
     <div class="notice-cards flexCenter" style="overflow: visible;">
@@ -9,16 +9,16 @@
           </div>
           <input type="text" autocomplete="off" class="container leftRoundedText">
         </div>
-        <div class="searchBarTools flexRow">
-
+        <div class="marginX-5" (click)="this.service.sendNewSubTicket()">
+          Add Sub Ticket
         </div>
       </div>
     </div>
   </div>
 
   <!-- Add New Ticket Button + Form -->
-  <div class="posRel flexCol" *ngIf="true">
-    <div id="modalFormTicket" class="posAbs card-add-ticket extendsPadding">
+  <div class="posAbs flexCol centered container" *ngIf="this.outLetTicketsModalForm.isModalOpen">
+    <div id="modalFormTicket" class="posAbs card-add-ticket extendsPadding centered">
       <div id="kontrakBucat" class="flexCol" *ngIf="this.outLetTicketsModalForm.isModalOpen">
         <div class="flexRow">
           <span class="bold description greenColor">Maintainer Tools</span>
@@ -33,6 +33,13 @@
           </div>
           <div class="viewBuilderForm">
             <label class="formDescriptive bold">
+              Subticket
+            </label>
+            <input id="ticketName" type="text" placeholder="Give subticket a name here (e.g: backlog....)"
+              formControlName="ticketName" autocomplete="off">
+          </div>
+          <div class="viewBuilderForm">
+            <label class="formDescriptive bold">
               Description
             </label>
             <textarea id="ticketDescription" formControlName="ticketDescription" class="txarea-input" spellcheck="false"
@@ -43,7 +50,7 @@
               <span class="bold description dimmedColor marginX-5">251</span>
               <span class="description dimmedColor">Characters left</span>
             </div>
-            <button type="submit" class="defaultButton small cPointer floatRight widthFull marginY-5"
+            <button type="submit" class="defaultButton small cPointer floatRight widthFull marginY-5 padding-5"
               (click)="this.addNewTicket_Publish()">Add Ticket</button>
           </div>
         </form>
@@ -53,79 +60,158 @@
 
   <div class="flexRow container" style="overflow-x: auto;overflow-y: hidden;">
     <!-- Ticket Lists -->
-    <div class="margin-5" *ngFor="let value of this.detailTicketsModel" >
+    <div class="margin-5 posRel" *ngFor="let value of this.ticketMaster;let i=index">
+
       <div class="header-tasks">
         <div class="widthFull dimmedColor flexCol" style="margin-top: .5rem">
           <div class="padding-5">
-            <span class="bold floatLeft">Backlog</span>
+            <span class="bold floatLeft">{{value}}</span>
             <div class="posRel heightFull floatRight cPointer" style="width: 15px;height: 25px;">
-              <fa-icon [icon]="this.faIcons['faArrowDown']" class="floatRight posAbs centered"></fa-icon>
+              <fa-icon [icon]="this.faIcons['faPlus']" class="dimmedColor buttonDefault cPointer"
+                (click)="this.addTicketTo(i,j)"></fa-icon>
             </div>
           </div>
         </div>
 
-        <div class="scrolled-tasks-container" style="height: 90%;">
-          <div class="flexCol overflowAuto extendsPadding" *ngIf="this.detailTicketsModel != null">
-            <div class="ticket-detail borderDefault" *ngFor="let value of this.detailTicketsModel">
-              <div class="flexCol" style="width: 100%;">
-                <span class="bold description name-tasks">{{value.tasks.tpdName}}</span>
-                <span class="small dimmedColor description-tasks">{{value.tasks.tpdDescriptor}}</span>
+        <div class="scrolled-tasks-container" style="max-height: 500px;width: 275px;">
+          <div id="boxTicket-{{i}}" class="flexCol overflowAuto" *ngIf="this.detailTicketsModel != null">
+            <div id="parentBox-{{i}}-{{j}}" style="margin-right: 1rem;"
+              *ngFor="let value of this.detailTicketsModel;let j=index">
+
+              <!-- Buat Add Data -->
+              <div id="boxTicket-add-{{i}}" class="flexCol overflowAuto" style="display: none;" *ngIf="j==0">
+                <div id="addNewTickets">
+                  <div class="flexCol add-new-ticket-style">
+                    <div class="flexCol" style="width: 100%;">
+                      <div class="flexCol" style="padding: 1rem;">
+                        <span id="newTicketTitle" contenteditable="true"
+                          class="bold description name-tasks editableContent" (focus)="onFocusInput(this)"
+                          (focusout)="onFocusOut('newTicketTitle')">Input Title</span>
+                        <!-- <input id="newTickets" type="text" class="set-title-header name-tasks bold" placeholder="Title"> -->
+                        <span id="newTicketDescription" class="small dimmedColor description-tasks editableContent"
+                          (focusout)="onFocusOut('newTicketDescription')" contenteditable="true">Input
+                          Description</span>
+                      </div>
+                    </div>
+                    <button class="defaultSquareButton marginY-5" (click)="this.addNewTicket_Push()">Add This
+                      Ticket</button>
+                  </div>
+                </div>
               </div>
+
+              <div id="ticketBox-{{i}}-{{j}}" class="flexCol ticket-detail">
+                <div class="flexCol" style="width: 100%;">
+                  <span class="bold description name-tasks"
+                    style="max-width: 100%;overflow: hidden;word-wrap: break-word;">{{value.tasks.tpdName}}</span>
+                  <span class="small dimmedColor description-tasks">{{value.tasks.tpdDescriptor}}</span>
+                  <div class="flexCol" style="margin-top: .35rem;">
+                    <span class="small bold description-tasks" style="margin-bottom: .25rem;">Progress</span>
+                    <div class="flexRow">
+                      <div class="progress-bar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Ticket Module Detail -->
 
-    <!-- <div class="container overflowAuto extendsPadding">
-      <div class="flexCol">
-        <span class="large bold primaryColor">
-          Backlog / Cust-Defect-Login-Problem
-        </span>
-        <div class="flexRow description openSans" style="text-align: justify;">
-          <div class="flexRow paddingX-5 widthFull">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="flexRow paddingX-5 widthFull">
-            <p></p>
+    <div class="margin-5 posRel">
+      <div class="header-tasks">
+        <div class="widthFull dimmedColor flexCol" style="margin-top: .5rem">
+          <div class="padding-5">
+            <input type="text" class="set-title-header dimmedColor" placeholder="Title">
+            <div class="posRel heightFull floatRight cPointer" style="width: 15px;height: 25px;">
+              <fa-icon [icon]="this.faIcons['faPlus']" class="dimmedColor buttonDefault cPointer"></fa-icon>
+            </div>
           </div>
         </div>
-        <div class="flexRow">
-          <div class="flexRow tag-top-bar">
-            <span class="description bold active">Active</span>
-            <span class="description bold">Resolve</span>
-            <span class="description bold">Postponed</span>
-          </div>
+
+        <div class="scrolled-tasks-container" style="max-height: 500px;">
         </div>
-        <div class="flexCol openSans  box-tickets marginY-5">
-
-          <div class="flexRow">
-            <input type="checkbox" style="height: 13.5px;width: 10px;">
-            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
-          </div>
-          <div class="flexRow">
-            <input type="checkbox" style="height: 13.5px;width: 10px;">
-            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
-          </div>
-          <div class="flexRow">
-            <input type="checkbox" style="height: 13.5px;width: 10px;">
-            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
-          </div>
-          <div class="flexRow">
-            <input type="checkbox" style="height: 13.5px;width: 10px;">
-            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
-          </div>
-          <div class="flexRow">
-            <input type="checkbox" style="height: 13.5px;width: 10px;">
-            <label for="ticket1" class="description">We've had issue when login with unverified account.</label>
-          </div>
+      </div>
+    </div>
+  </div>
 
 
+  <div class="posAbs container detail-tickets-modal shadowLarge" *ngIf="true">
+
+    <div class="flexRow" style="padding: 2.5rem 5rem;">
+
+      <div class="container flexCol">
+        <span class="small openSans dimmedColor">Dashboard / <span class="bold">Defect - Web - Ticket name out of
+            boundary</span></span>
+
+        <div class="container flexCol">
+
+          <!-- Tiket Information -->
+          <div class="container flexCol" style="margin-right: 1rem; margin-top: 1rem;">
+
+            <div class="contentGroup flexRow">
+
+              <div class="flexCol widthFull">
+                <div class="widthFull">
+                  <span class="header bold">#Defect - Web - Ticket name out of boundary</span>
+                </div>
+                <div class="floatLeft utility-button">
+                  <button>Mark as solved</button>
+                  <button>Move Ticket</button>
+                  <button>Move Ticket</button>
+                  <button>Move Ticket</button>
+                  <button>Move Ticket</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="contentGroup flexRow" style="margin-top: 2rem;">
+              <div class="flexCol widthFull">
+                <span class="bold description">Description</span>
+                <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+              </div>
+            </div>
+
+            <div class="contentGroup flexRow" style="margin-top: 2rem;">
+              <div class="marginY-5 flexCol">
+                <span class="bold description">Subtasks</span>
+                <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-    </div> -->
 
+      <div class="flexCol" style="width: 40%;">
+
+        <div class="contentGroup flexCol">
+          <span class="bold description">STATUS</span>
+          <div class="box-append flexRow">
+            <div class="bt">
+              <button>Backlog</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="contentGroup flexCol">
+          <span class="bold description">ASSIGNED</span>
+          <div class="marginY-5 flexRow">
+            <div style="width:45px;height:45px;margin-right: .5rem;overflow: hidden;border-radius: 100%;">
+              <div class="d-image-holder">
+                <img src="../../assets/sample_profile_3.jpg" width="100%">
+              </div>
+            </div>
+            <div class="posRel" style="height: 100%;max-width: 50%;">
+              <div class="posAbs centeredVertical bold description">ADLIRAIHAN002</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, ElementRef, Testability, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import './dashboard-member.model';
@@ -16,6 +16,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-member',
+  // template: '<div> maintenance </div>',
   templateUrl: './dashboard-member.component.html',
   styleUrls: ['./dashboard-member.component.css'],
   // template: '<div>maintenance</div><button (click)="this.service.sendNowPATCH()">PATCH NOW</button>'
@@ -39,9 +40,11 @@ export class DashboardMemberComponent implements OnInit {
 
   // Model
   service: dashboardMemberService
+  ticketMaster: Array<String> = new Array()
   subTicketModel: Array<String>
   conditionSubTicket: Boolean = false
   addNewTicket: Boolean = true
+  elementSelected: HTMLElement;
 
   detailTicketsModel: Array<ticketModel> = new Array<ticketModel>()
 
@@ -57,6 +60,7 @@ export class DashboardMemberComponent implements OnInit {
 
   subticketForm = new FormGroup({
     ticketName: new FormControl(''),
+    ticketSub: new FormControl(''),
     ticketDescription: new FormControl(''),
     ticketPlatform: new FormControl('')
   })
@@ -67,45 +71,50 @@ export class DashboardMemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDetailTasksForm()
+    // this.service.sendNowPATCH()
   }
 
   getDetailTasksForm() {
     var wSelf = this;
-    this.service.getDetailTickets().then(snapshot => {
+    
+    firebase.database().ref('ticket/project/example_project/detail_tickets/').on('value', (snapshot) => {
       snapshot.forEach(e => {
-        var ticketSingleModel = new ticketModel()
-        ticketSingleModel.deserializer(snapshot.val()[e.key])
-        console.log(snapshot.val()[e.key])
-        wSelf.detailTicketsModel.push(ticketSingleModel)
+
+        var masterConstructor = snapshot.val()[e.key]
+        if (wSelf.detailTicketsModel.length > 0) {
+          wSelf.detailTicketsModel = []
+        }
+
+        if (wSelf.ticketMaster.length == 0) {
+          wSelf.ticketMaster.push(e.key)
+        } else {
+          wSelf.ticketMaster.map( (value,index,array) => {
+            if (value != e.key) {
+              alert(e.key)
+              wSelf.ticketMaster.push(e.key)
+            }
+         })
+        }
+
+        for (const key in masterConstructor) {
+          if (Object.prototype.hasOwnProperty.call(masterConstructor, key)) {
+            const element = masterConstructor[key];
+            var ticketSingleModel = new ticketModel()
+            ticketSingleModel.deserializer(element)
+            wSelf.detailTicketsModel.push(ticketSingleModel)
+          }
+        }
+
+        // console.error(wSelf.detailTicketsModel)
+        // console.error(wSelf.ticketMaster)
       })
     })
+    // this.service.getDetailTickets().then(snapshot => {
+    // })
   }
 
   addNewTicket_Action() {
-    var valueTranslate = {
-      before: "",
-      after: ""
-    }
-    var valueBoolean = !this.outLetTicketsModalForm.isModalOpen
-    if (valueBoolean) {
-      this.outLetTicketsModalForm.isModalOpen = valueBoolean
-      valueTranslate.before = 'translate(120%,0%)'
-      valueTranslate.after = 'translate(0%,0%)'
-    } else {
-      valueTranslate.after = 'translate(120%,0%)'
-      valueTranslate.before = 'translate(0%,0%)'
-    }
-    document.getElementById(this.outLetTicketsModalForm.name).style.transform = valueTranslate.before
-    document.getElementById(this.outLetTicketsModalForm.name).animate([
-      { transform: valueTranslate.before },
-      { transform: valueTranslate.after }
-    ], {
-      duration: 250,
-      easing: 'ease-in-out',
-      fill: 'forwards'
-    }).finished.then(_ => {
-      this.outLetTicketsModalForm.isModalOpen = valueBoolean
-    })
+    this.outLetTicketsModalForm.isModalOpen = !this.outLetTicketsModalForm.isModalOpen;
   }
 
   addNewTicket_Publish() {
@@ -135,6 +144,49 @@ export class DashboardMemberComponent implements OnInit {
 
   setFieldError (outletName : string, didValid: boolean) {
     var elemStylus = {borderColor: (didValid) ? 'red' : 'rgba(0,0,0,.1)',borderColorAfter: (didValid) ? 'rgba(0,0,0,.1)' : 'red'};var field = document.getElementById(outletName);if (field.style.borderColor != 'red') {field.animate([{},{borderColor: elemStylus.borderColorAfter}],{duration: 250,easing: 'ease-in-out',fill: 'forwards'})}}
+
+  addTicketTo (row, section) {
+    var documentAdd = document.getElementById("boxTicket-add-" + row);
+    if (documentAdd.style.display === "none") {
+      documentAdd.style.display = 'block';
+    } else {
+      documentAdd.style.display = "none"
+    }
+
+    var documentTitleInput = document.getElementById("newTicketTitle")
+    var documentDescriptionInput = document.getElementById("newTicketDescription")
+    documentTitleInput.addEventListener("input", this.onInputChanges, false)
+  }
+
+  onInputChanges(e) {
+    // console.warn(e.target.value)
+  }
+
+  onFocusInput(e:string) {
+    var element = document.getElementById(e)
+  }
+
+  onFocusOut(e:string) {
+    var element = document.getElementById(e)
+    var elementValue = element.innerHTML
+    if (elementValue == "" && e == "newTicketTitle") {
+      element.innerHTML = "Input Title"
+    } else if (elementValue == "" && e == "newTicketDescription") {
+      element.innerHTML = "Input Description"
+    }
+  }
+
+  addNewTicket_Push() {
+    var documentTitleInput = document.getElementById("newTicketTitle")
+    var documentDescriptionInput = document.getElementById("newTicketDescription")
+    // value
+    const titleValue = documentTitleInput.innerHTML
+    const descriptionValue = documentDescriptionInput.innerHTML.replace("&nbsp;","")
+    // Value + Json Request
+    var ticketDetails = { tpdName: titleValue, tpdDescriptor: descriptionValue, tpdPlatform: "none"};
+    this.service.sendNewTicket(ticketDetails)
+  }
+
 }
 
 @Injectable()
@@ -148,9 +200,10 @@ export class dashboardMemberService {
     return this.http.get<firebase.firestore.DocumentData>(this.allTicketURL, { responseType: 'json' });
   }
 
-  sendExampleTasks = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/detail_tickets.json"
+  sendExampleTasks = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/detail_tickets/"
   sendExampleTasksPATCH = "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/detail_tickets.json"
-  sendNowPATCH() {
+  sendSubTicketData =  "https://projectmanagementsystem-59c8d.firebaseio.com/ticket/project/example_project/sub_ticket_form.json"
+  sendNowPATCH() { 
     var ticketSubTasks = [
       {
         sbTasksName: "benerin Bug!",
@@ -159,14 +212,14 @@ export class dashboardMemberService {
     ]
     var ticketDetails =
     {
-      tpdName: "adli raihan testing24",
+      tpdName: "adli raihan testing",
       tpdDescriptor: "descriptor25",
       tpdPlatform: "platformTest26",
       tpdSubTasks: ticketSubTasks
     };
 
-    var httpRequest = new HttpRequest("POST", this.sendExampleTasks, {
-      tasks: ticketDetails
+    var httpRequest = new HttpRequest("POST", this.sendExampleTasks + "backlog.json", {
+      tasks : ticketDetails
     })
     this.http.request(httpRequest).subscribe({
       complete() {
@@ -176,8 +229,32 @@ export class dashboardMemberService {
 
   }
 
+  sendNewSubTicket() {
+    // var ticketSubTasks = [
+    //   {
+    //     sbTasksName: "benerin Bug!",
+    //     sbTasksDone: false,
+    //   }
+    // ]
+    // var ticketDetails =
+    // {
+    //   tpdName: "adli raihan testing",
+    //   tpdDescriptor: "descriptor25",
+    //   tpdPlatform: "platformTest26",
+    //   tpdSubTasks: ticketSubTasks
+    // };
+    var httpRequest = new HttpRequest("PATCH", this.sendExampleTasks + "needToFix.json", {
+
+    })
+    this.http.request(httpRequest).subscribe({
+      complete() {
+        alert();
+      }
+    })
+  }
+
   sendNewTicket(request: any) {
-    var httpRequest = new HttpRequest("POST", this.sendExampleTasks, {
+    var httpRequest = new HttpRequest("POST", this.sendExampleTasks + "backlog.json", {
       tasks: request
     })
     this.http.request(httpRequest).subscribe({
@@ -187,8 +264,14 @@ export class dashboardMemberService {
     })
   }
 
-  getDetailTickets(): Promise<firebase.database.DataSnapshot> {
-    return firebase.database().ref('ticket/project/example_project/detail_tickets/').once('value')
+  // getDetailTickets(): Promise<firebase.database.DataSnapshot> {
+  //   firebase.database().ref('ticket/project/example_project/detail_tickets/').on('value', (data) => {
+  //     return data
+  //   })
+  // }
+
+  getDetailTicketsBySub(sub: string): Promise<firebase.database.DataSnapshot> {
+    return firebase.database().ref('ticket/project/example_project/detail_tickets/' + sub).once('value')
   }
 
 }

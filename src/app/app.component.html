@@ -37,8 +37,8 @@
             </div>
             <div class="separated-5 posRel container paddingX-5">
               <div class="flexCol posAbs centeredVertical">
-                <span class="bold primaryColor" style="overflow:hidden;">Kjelberg</span>
-                <span class="dimmedColor small openSans cPointer" style="overflow:hidden;">Quality Assurance</span>
+                <span class="bold primaryColor" style="overflow:hidden;" *ngIf="this.currentUser != nil">{{this.currentUser}}</span>
+                <span class="dimmedColor small openSans cPointer" style="overflow:hidden;">Auditor</span>
               </div>
             </div>
           </div>

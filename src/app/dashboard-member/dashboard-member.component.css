@@ -14,7 +14,7 @@
 
 /* TOP */
 .notice-from-office {
-    z-index: -9999;
+    z-index: 1;
 }
 
 .notice-from-office>.notice-cards {
@@ -198,9 +198,8 @@
 
 .card-add-ticket {
     width: 300px;
-    background: rgba(255, 255, 255, 0.604);
+    background: white;
     box-shadow: 0px 0px 15px #00b8931c;
-    right: 0;
     z-index: 10;
     /* transform:; */
 }
@@ -287,7 +286,23 @@
 
 .ticket-detail {
     margin-bottom: .5rem;
-    background: white;
+    cursor: pointer;
+    padding: 1rem;
+    background-color: white;
+    position: inherit;
+}
+
+.add-new-ticket-style {
+    margin-bottom: .5rem;
+    cursor: pointer;
+    background-color: white;
+    position: inherit;
+}
+
+.ticket-detail>* {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 
 .addTicket {
@@ -295,4 +310,59 @@
     padding: .5rem 1rem;
     margin-top: .5rem;
     margin-bottom: .5rem;
+}
+
+input[type='text'].set-title-header {
+    border: none;
+    background: none;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: bold;
+}
+input[type='text'].set-title-header:focus {
+    border: none;
+    outline: none;
+}
+.detail-tickets-modal {
+    background-color: white;
+    margin-top: 40px;
+}
+
+.bt>button {
+    padding: 0.15rem 1rem;
+    background: rgba(0,0,0,.01);
+    border-radius: .1rem;
+    border: 1px solid gray;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+span {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.bgShadowBlack {
+    height: 100%;
+    width: 100%;
+    background: black;
+    z-index: 99999;
+}
+
+.utility-button>* {
+    opacity: 0.8;
+    padding: .5rem .45rem;
+    font-size: 12.5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    margin-right: .25rem;
+    background-color: #00b894;
+    border-radius: .1rem;
+    color: white;
+}
+
+.contentGroup:not(:last-child) {
+    margin-bottom: 1rem;
 }

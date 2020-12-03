@@ -625,20 +625,43 @@
 			background-color: rgba(41, 128, 185,0.5);
 		}
 
-		.defaultButton {
-			padding: .5rem 1rem;
+		button {
+			cursor: pointer;
+		}
+
+		button {
+			outline: none;
+		}
+
+		button:focus {
+			outline: none;
+		}
+
+		.defaultSquareButton {
 			border: none;
 			color: white;
 			background-color: #0984e3;
 			font-family: 'Baloo 2', sans-serif;
 			transition: all 0.2s ease-in-out;
-			border-radius: 2px;
+			padding-left: 1rem;
+			padding-right: 1rem;
+			height: 35px;
+			font-weight: bold;
+		}
+
+		.defaultButton {
+			border: none;
+			color: white;
+			background-color: #0984e3;
+			font-family: 'Baloo 2', sans-serif;
+			transition: all 0.2s ease-in-out;
+			border-radius: 2.5rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
 		}
 
 		.defaultButton:focus {
 			outline: none;
-			box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-			background-color: #2980b9;
 		}
 
 		.defaultButtonTextOnly {
@@ -646,6 +669,12 @@
 			border: none;
 			background: none;
 			color: rgba(68, 189, 50,1.0);
+			font-family: 'Baloo 2', sans-serif;
+			font-weight: bold;
+		}
+
+		.defaultButton.green {
+			background-color: #02AAB0;
 		}
 
 		.costProduction>div {
@@ -766,4 +795,20 @@
 			border-radius: .25rem;
 		}
 
+		.background-modal {
+			background-color: rgba(0, 0, 0, 0.2);
+			position: fixed;
+			min-width: 100%;
+			min-height: 100%;
+			z-index: 1;
+		}
+
+		.editableContent {
+			outline: none;
+			border: none;
+		}
+
+		.editableContent:focus {
+			outline: none;
+		}
 		

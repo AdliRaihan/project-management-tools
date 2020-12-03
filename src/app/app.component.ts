@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   faSignOut = faSignOutAlt;
   faBell = faBell;
   title = 'project-management-system';
+  currentUser;
 
   services: globalComponents;
   authenticated:boolean;
@@ -37,6 +38,13 @@ export class AppComponent implements OnInit {
     this.services.checkAuthSubject.subscribe({
       next(value) {
         weakSelf.authenticated = value
+      }
+    })
+
+    this.services.checkUserEmailSubject.subscribe( {
+      next(value) {
+        var userName = value.split("@");
+        weakSelf.currentUser = userName[0];
       }
     })
   } 

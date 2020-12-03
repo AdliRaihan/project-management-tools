@@ -18,8 +18,10 @@ export class globalComponents {
     }
 
     kontol = false
+    currentUser;
 
     checkAuthSubject = new Subject<boolean>()
+    checkUserEmailSubject = new Subject<String>()
     checkLogin = firebase.auth()
 
     userSessionDestroy() {
@@ -40,9 +42,9 @@ export class globalComponents {
 
     userSessionCheckAuth() {
         var authenticate = firebase.auth()
-        var currentUser = authenticate.currentUser
         authenticate.onAuthStateChanged( observer2 => {
             this.checkAuthSubject.next(firebase.auth().currentUser !== null)
+            this.checkUserEmailSubject.next(firebase.auth().currentUser.email)
         }, (error) => {
             this.checkAuthSubject.error(error)
         })

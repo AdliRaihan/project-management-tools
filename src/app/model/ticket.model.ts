@@ -6,6 +6,7 @@ interface modelerObj {
 
 export class ticketModel implements modelerObj {
     tasks: any
+    UID: string
     deserializer(input: any): this {
         Object.assign(this, input)
         return this

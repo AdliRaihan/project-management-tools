@@ -562,8 +562,8 @@
 		/* width */
 		::-webkit-scrollbar {
 		  	width: 5px;
-			  height: 10px;
-			  border-radius: 5px;
+			height: 10px;
+			border-radius: 5px;
 		}
 
 		/* Track */
@@ -640,13 +640,22 @@
 		.defaultSquareButton {
 			border: none;
 			color: white;
-			background-color: #0984e3;
+			background-color: #12aa8eb9;
 			font-family: 'Baloo 2', sans-serif;
 			transition: all 0.2s ease-in-out;
 			padding-left: 1rem;
 			padding-right: 1rem;
 			height: 35px;
 			font-weight: bold;
+		}
+
+		.defaultSquareButton>*>button {
+			border: none;
+			color: white;
+			font-family: 'Baloo 2', sans-serif;
+			transition: all 0.2s ease-in-out;
+			font-weight: bold;
+			background-color: rgba(0, 0, 0, 0);
 		}
 
 		.defaultButton {
@@ -805,7 +814,10 @@
 
 		.editableContent {
 			outline: none;
-			border: none;
+			border: 1px solid rgb(186, 186, 186);
+			border-radius: .1rem;
+			background-color: rgba(0, 0, 0, 0.01);
+			padding: .25rem .40rem;
 		}
 
 		.editableContent:focus {

@@ -323,6 +323,8 @@ input[type='text'].set-title-header:focus {
     outline: none;
 }
 .detail-tickets-modal {
+    min-width: 600px;
+    max-width: 600px;
     background-color: white;
     margin-top: 40px;
 }
@@ -366,3 +368,22 @@ span {
 .contentGroup:not(:last-child) {
     margin-bottom: 1rem;
 }
+
+
+::-webkit-scrollbar {
+    width: 1px !important;
+    height: 10px;
+    border-radius: 5px;
+}
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05) !important;
+        }
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+            background: rgba(34, 47, 62,0.1);
+            border-radius: 2.5px;
+          }
+  

@@ -51,7 +51,7 @@
               <span class="description dimmedColor">Characters left</span>
             </div>
             <button type="submit" class="defaultButton small cPointer floatRight widthFull marginY-5 padding-5"
-              (click)="this.addNewTicket_Publish()">Add Ticket</button>
+              (click)="this.addNewTicket_Publish()"><fa-icon [icon]="this.faIcons['faCheck']"></fa-icon></button>
           </div>
         </form>
       </div>
@@ -76,7 +76,7 @@
         <div class="scrolled-tasks-container" style="max-height: 500px;width: 275px;">
           <div id="boxTicket-{{i}}" class="flexCol overflowAuto" *ngIf="this.detailTicketsModel != null">
             <div id="parentBox-{{i}}-{{j}}" style="margin-right: 1rem;"
-              *ngFor="let value of this.detailTicketsModel;let j=index">
+              *ngFor="let value of this.detailTicketsModel;let j=index" (click)="selectSpecificTicket(j)">
 
               <!-- Buat Add Data -->
               <div id="boxTicket-add-{{i}}" class="flexCol overflowAuto" style="display: none;" *ngIf="j==0">
@@ -86,15 +86,23 @@
                       <div class="flexCol" style="padding: 1rem;">
                         <span id="newTicketTitle" contenteditable="true"
                           class="bold description name-tasks editableContent" (focus)="onFocusInput(this)"
-                          (focusout)="onFocusOut('newTicketTitle')">Input Title</span>
+                          (focusout)="onFocusOut('newTicketTitle')" (focusin)="onFocusInput('newTicketTitle')">Input Title</span>
                         <!-- <input id="newTickets" type="text" class="set-title-header name-tasks bold" placeholder="Title"> -->
                         <span id="newTicketDescription" class="small dimmedColor description-tasks editableContent"
-                          (focusout)="onFocusOut('newTicketDescription')" contenteditable="true">Input
+                          (focusout)="onFocusOut('newTicketDescription')" (focusin)="onFocusInput('newTicketDescription')" contenteditable="true">Input
                           Description</span>
                       </div>
                     </div>
-                    <button class="defaultSquareButton marginY-5" (click)="this.addNewTicket_Push()">Add This
-                      Ticket</button>
+
+                    <div class="flexRow defaultSquareButton posRel">
+                      <div class="posAbs centeredHorizontal">
+                        <fa-icon [icon]="this.faIcons['faCheck']" (click)="this.addNewTicket_Push()" style="color: white;"></fa-icon>
+                        <button class="marginY-5" (click)="this.addNewTicket_Push()">Add This
+                          Ticket</button>
+                      </div>
+
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -136,82 +144,160 @@
     </div>
   </div>
 
+  <div class="posAbs container" style="background-color: rgba(0, 0, 0, 0.1);" *ngIf="this.selectedTicket != null"></div>
+  <div class="posAbs centeredHorizontal detail-tickets-modal shadowLarge" *ngIf="this.selectedTicket != null" style="max-height: 100%;overflow: auto;">
 
-  <div class="posAbs container detail-tickets-modal shadowLarge" *ngIf="true">
+    <div class="flexRow" style="padding: 2.5rem;overflow: hidden;">
 
-    <div class="flexRow" style="padding: 2.5rem 5rem;">
+      <div class="container flexCol" style="overflow: hidden;">
+        <span class="small openSans dimmedColor">Dashboard / <span class="bold">{{this.selectedTicket.tasks.tpdName}}</span></span>
 
-      <div class="container flexCol">
-        <span class="small openSans dimmedColor">Dashboard / <span class="bold">Defect - Web - Ticket name out of
-            boundary</span></span>
-
-        <div class="container flexCol">
+        <div class="container flexCol" style="overflow: hidden;">
 
           <!-- Tiket Information -->
-          <div class="container flexCol" style="margin-right: 1rem; margin-top: 1rem;">
+          <div class="container flexCol" style="margin-right: 1rem; margin-top: 1rem;overflow: hidden;">
 
             <div class="contentGroup flexRow">
 
               <div class="flexCol widthFull">
                 <div class="widthFull">
-                  <span class="header bold">#Defect - Web - Ticket name out of boundary</span>
+                  <span class="header bold">{{this.selectedTicket.tasks.tpdName}}</span>
                 </div>
-                <div class="floatLeft utility-button">
-                  <button>Mark as solved</button>
-                  <button>Move Ticket</button>
-                  <button>Move Ticket</button>
-                  <button>Move Ticket</button>
-                  <button>Move Ticket</button>
+              </div>
+              <div class="contentGroup flexCol">
+                <span class="bold description">Status</span>
+                <div class="box-append flexRow">
+                  <div class="bt">
+                    <button>Backlog</button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="contentGroup flexRow" style="margin-top: 2rem;">
+            <div class="contentGroup flexRow" style="margin-top: .5rem;">
               <div class="flexCol widthFull">
                 <span class="bold description">Description</span>
-                <span class="small openSans">Input description ticket title and description has nbsp and if word is to
-                  long the word start spacingout</span>
+                <span class="description">{{this.selectedTicket.tasks.tpdDescriptor}}</span>
               </div>
             </div>
 
-            <div class="contentGroup flexRow" style="margin-top: 2rem;">
+            <div class="contentGroup flexRow heightFull" style="margin-top: .05rem;overflow: hidden;">
+
               <div class="marginY-5 flexCol">
                 <span class="bold description">Subtasks</span>
-                <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                <!--  -->
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
                   long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow marginY-5">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+                <div class="flexRow">
+                  <div class="floatLeft flexRow">
+                    <input type="checkbox">
+                  </div>
+                  <span class="small openSans">Input description ticket title and description has nbsp and if word is to
+                  long the word start spacingout</span>
+                </div>
+
+
               </div>
+
             </div>
           </div>
         </div>
       </div>
 
 
-      <div class="flexCol" style="width: 40%;">
+      <!--div class="flexCol" style="width: 50%;">
+
 
         <div class="contentGroup flexCol">
-          <span class="bold description">STATUS</span>
-          <div class="box-append flexRow">
-            <div class="bt">
-              <button>Backlog</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="contentGroup flexCol">
-          <span class="bold description">ASSIGNED</span>
+          <span class="bold description">ASSIGNEE</span>
           <div class="marginY-5 flexRow">
-            <div style="width:45px;height:45px;margin-right: .5rem;overflow: hidden;border-radius: 100%;">
+            <div style="width:35px;height:35px;margin-right: 1rem;overflow: hidden;border-radius: 100%;">
               <div class="d-image-holder">
                 <img src="../../assets/sample_profile_3.jpg" width="100%">
               </div>
             </div>
             <div class="posRel" style="height: 100%;max-width: 50%;">
-              <div class="posAbs centeredVertical bold description">ADLIRAIHAN002</div>
+              <div class="posAbs centeredVertical bold small">ADLIRAIHAN002</div>
             </div>
           </div>
         </div>
 
-      </div>
+      </div -->
     </div>
   </div>
 </div>

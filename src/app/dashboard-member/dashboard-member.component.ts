@@ -6,7 +6,7 @@ import './dashboard-member.model';
 import { dashboardTicketModel, subTicketModel } from './dashboard-member.model';
 import { ticketModel } from '../model/ticket.model'
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { faEdit, faPlus, faBuilding, faCertificate, faDatabase, faAngleDown, faClock, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPlus, faBuilding, faCertificate, faDatabase, faAngleDown, faClock, faSearch, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faApple, faAndroid, faAngular } from '@fortawesome/free-brands-svg-icons';
 import { userComponents } from '../service/user.components';
 import { __spreadArrays } from 'tslib';
@@ -35,7 +35,8 @@ export class DashboardMemberComponent implements OnInit {
     "faDatabase": faDatabase,
     "faEdit": faEdit,
     "faArrowDown": faAngleDown,
-    "faClock": faClock
+    "faClock": faClock,
+    "faCheck": faCheck
   }
 
   // Model
@@ -47,6 +48,7 @@ export class DashboardMemberComponent implements OnInit {
   elementSelected: HTMLElement;
 
   detailTicketsModel: Array<ticketModel> = new Array<ticketModel>()
+  selectedTicket: ticketModel;
 
   outLetTicketsModalForm = {
     name: "modalFormTicket",
@@ -101,16 +103,18 @@ export class DashboardMemberComponent implements OnInit {
             const element = masterConstructor[key];
             var ticketSingleModel = new ticketModel()
             ticketSingleModel.deserializer(element)
+            ticketSingleModel.UID = key
             wSelf.detailTicketsModel.push(ticketSingleModel)
           }
         }
-
-        // console.error(wSelf.detailTicketsModel)
-        // console.error(wSelf.ticketMaster)
       })
     })
-    // this.service.getDetailTickets().then(snapshot => {
-    // })
+  }
+
+  selectSpecificTicket(e: number) {
+    this.selectedTicket = this.detailTicketsModel[e]
+    console.warn(this.detailTicketsModel[e])
+    // firebase.database().ref('ticket/project/example_project/detail_tickets/backlog/'+ e).remove()
   }
 
   addNewTicket_Action() {
@@ -164,14 +168,19 @@ export class DashboardMemberComponent implements OnInit {
 
   onFocusInput(e:string) {
     var element = document.getElementById(e)
+    if (e == "newTicketTitle") {
+      element.innerHTML = ""
+    } else if (e == "newTicketDescription") {
+      element.innerHTML = ""
+    }
   }
 
   onFocusOut(e:string) {
     var element = document.getElementById(e)
     var elementValue = element.innerHTML
-    if (elementValue == "" && e == "newTicketTitle") {
+    if ((elementValue == "" || elementValue == "Input Title") && e == "newTicketTitle") {
       element.innerHTML = "Input Title"
-    } else if (elementValue == "" && e == "newTicketDescription") {
+    } else if ((elementValue == "" || elementValue == "Input Description") && e == "newTicketDescription") {
       element.innerHTML = "Input Description"
     }
   }
@@ -179,12 +188,33 @@ export class DashboardMemberComponent implements OnInit {
   addNewTicket_Push() {
     var documentTitleInput = document.getElementById("newTicketTitle")
     var documentDescriptionInput = document.getElementById("newTicketDescription")
-    // value
-    const titleValue = documentTitleInput.innerHTML
-    const descriptionValue = documentDescriptionInput.innerHTML.replace("&nbsp;","")
-    // Value + Json Request
-    var ticketDetails = { tpdName: titleValue, tpdDescriptor: descriptionValue, tpdPlatform: "none"};
-    this.service.sendNewTicket(ticketDetails)
+    // Validation
+    if (this.addNewTicket_Push_Validation("newTicketTitle") || this.addNewTicket_Push_Validation("newTicketDescription")) {
+      
+    } else {
+      // value
+      const titleValue = documentTitleInput.innerHTML
+      const descriptionValue = documentDescriptionInput.innerHTML.replace("&nbsp;","")
+      // Value + Json Request
+      var ticketDetails = { tpdName: titleValue, tpdDescriptor: descriptionValue, tpdPlatform: "none"};
+      this.service.sendNewTicket(ticketDetails)
+    }
+  }
+
+  addNewTicket_Push_Validation(e:string) {
+    var element = document.getElementById(e)
+    var elementValue = element.innerHTML
+    if ((elementValue == "" || elementValue == "Input Title") && e == "newTicketTitle") {
+      element.innerHTML = "Input Title"
+      this.setFieldError(e,false)
+      return true
+    } else if ((elementValue == "" || elementValue == "Input Description") && e == "newTicketDescription") {
+      element.innerHTML = "Input Description"
+      this.setFieldError(e,false)
+      return true
+    }
+    alert(elementValue)
+    return false
   }
 
 }
